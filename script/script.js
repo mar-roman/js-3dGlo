@@ -47,4 +47,67 @@ window.addEventListener('DOMContentLoaded', () => {
 		updateClock();
 	}
 	countTimer('01 september 2021');
+
+	// Menu
+	const toggleMenu = () => {
+		const btnMenu = document.querySelector('.menu'),
+					menu = document.querySelector('menu'),
+					closeBtn = document.querySelector('.close-btn'),
+					menuItems = menu.querySelectorAll('ul>li');
+		
+		const handlerMenu = () => {
+			menu.classList.toggle('active-menu');
+		};
+
+		btnMenu.addEventListener('click', handlerMenu);
+		closeBtn.addEventListener('click', handlerMenu);
+
+		menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+	};
+
+	toggleMenu();
+
+	//popup
+	const togglePopUp = () => {
+		const popup = document.querySelector('.popup'),
+					popupBtn = document.querySelectorAll('.popup-btn'),
+					popupClose = document.querySelector('.popup-close');
+
+		popupBtn.forEach((elem) => {
+			elem.addEventListener('click', () => {
+				popup.style.display = 'block';
+
+				popup.style.opacity = 0;
+				let vision = 0;
+				let anim = setInterval(function(){
+					if(vision === 1){
+						clearInterval(anim);
+					} else {
+						vision += 0.2;
+						popup.style.opacity = vision;
+					}
+				}, 30);
+			});
+		});
+
+		popupClose.addEventListener('click', () => {
+			popup.style.display = 'none';
+		});
+	};
+
+	togglePopUp();
+
+	//scroll
+	const smoothLinks = document.querySelectorAll('a[href^="#"]');
+	for (let smoothLink of smoothLinks) {
+		smoothLink.addEventListener('click', function(e) {
+			e.preventDefault();
+			const id = smoothLink.getAttribute('href');
+			document.querySelector(id).scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
+		});
+	}
+
 });
