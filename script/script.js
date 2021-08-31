@@ -77,16 +77,18 @@ window.addEventListener('DOMContentLoaded', () => {
 			elem.addEventListener('click', () => {
 				popup.style.display = 'block';
 
-				popup.style.opacity = 0;
-				let vision = 0;
-				let anim = setInterval(function(){
-					if(vision === 1){
-						clearInterval(anim);
-					} else {
-						vision += 0.2;
-						popup.style.opacity = vision;
-					}
-				}, 30);
+				if(window.screen.width >= 768){
+					popup.style.opacity = 0;
+					let opacity = 0;
+					let anim = setInterval(function(){
+						if(opacity === 1){
+							clearInterval(anim);
+						} else {
+							opacity += 0.2;
+							popup.style.opacity = opacity;
+						}
+					}, 70);
+				}
 			});
 		});
 
